@@ -1,0 +1,29 @@
+{
+  "name": "sauce-platform-config",
+  "version": "0.1.0",
+  "description": "Tool for creating on-the-fly / on-demand webdriver configs for Sauce Labs grids",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainrivas/sauce-platform-config.git"
+  },
+  "keywords": [
+    "saucelabs",
+    "webdriver",
+    "selenium",
+    "crossbrowser",
+    "testing",
+    "automation",
+    "config",
+    "capabilities"
+  ],
+  "author": "Efrain 'Rain' Rivas",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rainrivas/sauce-platform-config/issues"
+  },
+  "homepage": "https://github.com/rainrivas/sauce-platform-config#readme"
+}
