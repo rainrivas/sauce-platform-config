@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config({ debug: true });
+
 export default function platformConfigs() {
     interface slcaps {
         seleniumVersion: string;
@@ -13,31 +17,36 @@ export default function platformConfigs() {
         throw new Error(`Sauce username and authkey must both be defined, ${process.env.SAUCE_USER} | ${process.env.SAUCE_AUTHKEY}`);
     }
     let host = `https://${process.env.SAUCE_USER}:${process.env.SAUCE_AUTHKEY}@ondemand.saucelabs.com:443/wd/hub`;
-    let slconfig = process.env.SAUCE_BROWSER.split('-');
-    
-    let caps = {
-        'seleniumVersion': '3.14.0',
-        'extendedDebugging': process.env.SAUCE_DEBUG,// fixed
-        // 'browserName':"" ,
-        // 'version':"" ,
-        // 'platform':"",
-        // 'tunnel':"" ,
-        // 'name':"" ,
-        // 'build':"" 
-    };
-
+    let browser = process.env.SAUCE_BROWSER
     // Declare optional values now so we can use them later
     let version = process.env.SAUCE_BROWSER_VERSION;
     let platform = process.env.SAUCE_OS;
     let tunnel = process.env.SAUCE_TUNNEL;
+    let name = process.env.TEST_NAME;
+    let build = process.env.BUILD_NUMBER;
+    let extendedDebugging = process.env.SAUCE_DEBUG;
+    console.log(extendedDebugging);
 
-    if ('firefox, chrome, safari'.includes(slconfig[2])) {
-        caps.browserName = slconfig[2];
+    let caps = {
+        'seleniumVersion': '3.14.0',
+        'extendedDebugging': '',
+        'browserName': "",
+        'version': "",
+        'platform': "",
+        'tunnel': "",
+        'name': "",
+        'build': ""
+    };
+
+
+
+    if ('firefox, chrome, safari'.includes(browser)) {
+        caps.browserName = browser;
         if (platform === 'undefined' || platform.includes('Windows')) { platform = 'macOS 10.13' }
-    } else if ('ie'.includes(slconfig[2])) {
+    } else if ('ie'.includes(browser)) {
         caps.browserName = 'internet explorer';
         if (platform === 'undefined' || platform.includes('mac')) { platform = 'Windows 10' }
-    } else if ('edge'.includes(slconfig[2])) {
+    } else if ('edge'.includes(browser)) {
         caps.browserName = 'MicrosoftEdge';
         if (platform === 'undefined' || platform.includes('mac')) { platform = 'Windows 10' }
     } else { // if no good browser name was found, just make it random
@@ -75,8 +84,8 @@ export default function platformConfigs() {
     (platform === 'undefined') ? caps.platform = 'Windows 10' : caps.platform = platform;
     (tunnel === 'undefined') ? caps.tunnel = '' : caps.tunnel = tunnel;
 
-    caps.name = process.env['TEST_NAME'];
-    caps.build = process.env['BUILD_NUMBER'];
+    caps.name = name;
+    caps.build = build;
     console.info(`Custom SL driver caps: ${JSON.stringify(caps)}`);
     return { "host": host, "caps": caps }
 }

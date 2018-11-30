@@ -1,7 +1,5 @@
-import { config } from 'dotenv';
 import platformConfigs from './platformConfigs'
 
-config(); // load environment variables
 platformConfigs();
 
 // sauce api-- https://YOUR_SAUCE_USERNAME:YOUR_SAUCE_ACCESS_KEY@saucelabs.com/rest/v1/users/YOUR_SAUCE_USERNAME
