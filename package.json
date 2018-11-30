@@ -4,6 +4,8 @@
   "description": "Tool for creating on-the-fly / on-demand webdriver configs for Sauce Labs grids",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "standard **/*.ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,5 +27,31 @@
   "bugs": {
     "url": "https://github.com/rainrivas/sauce-platform-config/issues"
   },
-  "homepage": "https://github.com/rainrivas/sauce-platform-config#readme"
+  "homepage": "https://github.com/rainrivas/sauce-platform-config#readme",
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/node": "^10.5.2",
+    "eslint-plugin-typescript": "^0.12.0",
+    "jest": "^23.4.0",
+    "standard": "^10.0.3",
+    "ts-jest": "^23.0.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.1",
+    "typescript-eslint-parser": "^18.0.0"
+  },
+  "standard": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "typescript"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^6.1.0"
+  },
+  "directories": {
+    "lib": "lib"
+  }
 }

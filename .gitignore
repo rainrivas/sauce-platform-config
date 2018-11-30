@@ -60,6 +60,9 @@ typings/
 # next.js build output
 .next
 
+# typescript output folder
+lib/
+
 # vscode settings
 .vscode/*
 !.vscode/settings.json
