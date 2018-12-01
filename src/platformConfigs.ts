@@ -2,40 +2,37 @@ import dotenv from 'dotenv';
 
 dotenv.config({ debug: true });
 
+export interface slcaps {
+    browserName: string;
+    seleniumVersion?: string;
+    extendedDebugging?: boolean | string;
+    version?: string | number;
+    platform?: string;
+    tunnel?: string;
+    name?: string;
+    build?: string;
+}
+
 export default function platformConfigs() {
-    interface slcaps {
-        seleniumVersion: string;
-        extendedDebugging?: boolean;
-        browserName?: string;
-        version?: number
-        platform?: string
-        tunnel?: string
-        name?: string
-        build?: string
-    }
     if (process.env.SAUCE_USER === 'undefined' || process.env.SAUCE_AUTHKEY === 'undefined') {
         throw new Error(`Sauce username and authkey must both be defined, ${process.env.SAUCE_USER} | ${process.env.SAUCE_AUTHKEY}`);
     }
     let host = `https://${process.env.SAUCE_USER}:${process.env.SAUCE_AUTHKEY}@ondemand.saucelabs.com:443/wd/hub`;
-    let browser = process.env.SAUCE_BROWSER
+    let browser = process.env.SAUCE_BROWSER ? process.env.SAUCE_BROWSER : '';
     // Declare optional values now so we can use them later
-    let version = process.env.SAUCE_BROWSER_VERSION;
-    let platform = process.env.SAUCE_OS;
-    let tunnel = process.env.SAUCE_TUNNEL;
-    let name = process.env.TEST_NAME;
-    let build = process.env.BUILD_NUMBER;
-    let extendedDebugging = process.env.SAUCE_DEBUG;
+    let version = process.env.SAUCE_BROWSER_VERSION ? process.env.SAUCE_BROWSER_VERSION : '';
+    let platform = process.env.SAUCE_OS ? process.env.SAUCE_OS : '';
+    let tunnel = process.env.SAUCE_TUNNEL ? process.env.SAUCE_TUNNEL : '';
+    let name = process.env.TEST_NAME ? process.env.TEST_NAME : '';
+    let build = process.env.BUILD_NUMBER ? process.env.BUILD_NUMBER : '';
+    let extendedDebugging = process.env.SAUCE_DEBUG ? process.env.SAUCE_DEBUG : false;
     console.log(extendedDebugging);
 
-    let caps = {
+    let caps: slcaps
+    caps = {
+        'browserName':browser,
         'seleniumVersion': '3.14.0',
-        'extendedDebugging': '',
-        'browserName': "",
-        'version': "",
-        'platform': "",
-        'tunnel': "",
-        'name': "",
-        'build': ""
+        'extendedDebugging': extendedDebugging,
     };
 
 
