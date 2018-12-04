@@ -8,7 +8,8 @@ export interface slcaps {
     extendedDebugging?: boolean | string;
     version?: string | number;
     platform?: string;
-    tunnel?: string;
+    tunnelIdentifier?: string;
+    parentTunnel?: string;
     name?: string;
     build?: string;
 }
@@ -79,7 +80,7 @@ export default function platformConfigs() {
     // assign optional caps their default values if none is defined
     (version === 'undefined') ? caps.version = 'latest' : caps.version = version;
     (platform === 'undefined') ? caps.platform = 'Windows 10' : caps.platform = platform;
-    (tunnel === 'undefined') ? caps.tunnel = '' : caps.tunnel = tunnel;
+    (tunnel === 'undefined') ? caps.tunnelIdentifier = '' : caps.tunnelIdentifier = tunnel;
 
     caps.name = name;
     caps.build = build;
